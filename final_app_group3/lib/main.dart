@@ -4,30 +4,36 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'Screens/settings_screen.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();  // Inicializar Firebase aquí
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        textTheme: TextTheme(
-          bodyText1: TextStyle(fontSize: 18.0),
-          bodyText2: TextStyle(fontSize: 18.0),
+        textTheme: const TextTheme(
+          bodyLarge: TextStyle(fontSize: 18.0),
+          bodyMedium: TextStyle(fontSize: 18.0),
         ),
       ),
-      home: LoginScreen(),
+      home: const LoginScreen(),
     );
   }
 }
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -86,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login', style: TextStyle(fontSize: 24)),
+        title: const Text('Login', style: TextStyle(fontSize: 24)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -96,39 +102,39 @@ class _LoginScreenState extends State<LoginScreen> {
             if (errorMessage != null)
               Text(
                 errorMessage!,
-                style: TextStyle(color: Colors.red),
+                style: const TextStyle(color: Colors.red),
               ),
             TextField(
               controller: _usernameController,
-              decoration: InputDecoration(labelText: 'Email', labelStyle: TextStyle(fontSize: 20)),
+              decoration: const InputDecoration(labelText: 'Email', labelStyle: TextStyle(fontSize: 20)),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             TextField(
               controller: _passwordController,
-              decoration: InputDecoration(labelText: 'Password', labelStyle: TextStyle(fontSize: 20)),
+              decoration: const InputDecoration(labelText: 'Password', labelStyle: TextStyle(fontSize: 20)),
               obscureText: true,
             ),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             ElevatedButton(
               onPressed: _login,
-              child: Text('Login', style: TextStyle(fontSize: 20)),
               style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
+              child: const Text('Login', style: TextStyle(fontSize: 20)),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             ElevatedButton(
               onPressed: _register,
-              child: Text('Register', style: TextStyle(fontSize: 20)),
               style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
+              child: const Text('Register', style: TextStyle(fontSize: 20)),
             ),
           ],
         ),
@@ -141,7 +147,7 @@ class HomeScreen extends StatefulWidget {
   final String username;
   final String password;
 
-  HomeScreen({required this.username, required this.password});
+  const HomeScreen({super.key, required this.username, required this.password});
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -150,10 +156,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
-  static List<Widget> _widgetOptions = <Widget>[
-    TapScreen(),
-    LightScreen(),
-    FallSensorScreen(),
+  static final List<Widget> _widgetOptions = <Widget>[
+    const TapScreen(),
+    const LightScreen(),
+    const FallSensorScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -166,20 +172,17 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home', style: TextStyle(fontSize: 24)),
+        title: const Text('Home', style: TextStyle(fontSize: 24)),
         actions: [
           IconButton(
-            icon: Icon(Icons.settings),
+            icon: const Icon(Icons.settings),
             onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => SettingsScreen(
-                    username: widget.username,
-                    password: widget.password,
+                  builder: (context) => SettingsScreen(username: widget.username),
                   ),
-                ),
-              );
+                );
             },
           ),
         ],
@@ -213,6 +216,8 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class TapScreen extends StatefulWidget {
+  const TapScreen({super.key});
+
   @override
   _TapScreenState createState() => _TapScreenState();
 }
@@ -227,8 +232,8 @@ class _TapScreenState extends State<TapScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Grifo Control', style: TextStyle(fontSize: 24)),
-          SizedBox(height: 20),
+          const Text('Grifo Control', style: TextStyle(fontSize: 24)),
+          const SizedBox(height: 20),
           Slider(
             value: _value,
             min: 0,
@@ -240,34 +245,34 @@ class _TapScreenState extends State<TapScreen> {
               });
             },
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
               // Emergency action
             },
-            child: Text('Emergency', style: TextStyle(fontSize: 20)),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.red,
-              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
+            child: const Text('Emergency', style: TextStyle(fontSize: 20)),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
               setState(() {
                 _value = 0.0;
               });
             },
-            child: Text('Stop', style: TextStyle(fontSize: 20)),
             style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
+            child: const Text('Stop', style: TextStyle(fontSize: 20)),
           ),
         ],
       ),
@@ -276,6 +281,8 @@ class _TapScreenState extends State<TapScreen> {
 }
 
 class LightScreen extends StatefulWidget {
+  const LightScreen({super.key});
+
   @override
   _LightScreenState createState() => _LightScreenState();
 }
@@ -288,7 +295,7 @@ class _LightScreenState extends State<LightScreen> {
   void initState() {
     super.initState();
     // Simulate light sensor data update
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         _lightValue = (_lightValue + 10) % 100; // Simulating light sensor data
       });
@@ -308,11 +315,11 @@ class _LightScreenState extends State<LightScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Nivel de Luz', style: TextStyle(fontSize: 24)),
-          SizedBox(height: 20),
-          Icon(Icons.wb_sunny, size: 100, color: Colors.yellow),
-          SizedBox(height: 20),
-          Text('Lux: ${_lightValue.toStringAsFixed(2)}', style: TextStyle(fontSize: 20)),
+          const Text('Nivel de Luz', style: TextStyle(fontSize: 24)),
+          const SizedBox(height: 20),
+          const Icon(Icons.wb_sunny, size: 100, color: Colors.yellow),
+          const SizedBox(height: 20),
+          Text('Lux: ${_lightValue.toStringAsFixed(2)}', style: const TextStyle(fontSize: 20)),
         ],
       ),
     );
@@ -320,6 +327,8 @@ class _LightScreenState extends State<LightScreen> {
 }
 
 class FallSensorScreen extends StatelessWidget {
+  const FallSensorScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -327,20 +336,20 @@ class FallSensorScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Sensor de Caída', style: TextStyle(fontSize: 24)),
-          SizedBox(height: 20),
+          const Text('Sensor de Caída', style: TextStyle(fontSize: 24)),
+          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
               // Logic for detecting fall and triggering notification
             },
-            child: Text('Simular Caída', style: TextStyle(fontSize: 20)),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.orange,
-              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
+            child: const Text('Simular Caída', style: TextStyle(fontSize: 20)),
           ),
         ],
       ),
@@ -348,29 +357,4 @@ class FallSensorScreen extends StatelessWidget {
   }
 }
 
-class SettingsScreen extends StatelessWidget {
-  final String username;
-  final String password;
 
-  SettingsScreen({required this.username, required this.password});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Settings', style: TextStyle(fontSize: 24)),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Username: $username', style: TextStyle(fontSize: 20)),
-            SizedBox(height: 20),
-            Text('Password: $password', style: TextStyle(fontSize: 20)),
-          ],
-        ),
-      ),
-    );
-  }
-}

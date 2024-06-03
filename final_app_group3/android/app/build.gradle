@@ -1,10 +1,9 @@
-import java.util.Properties
 
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'dev.flutter.flutter-gradle-plugin'
-    id 'com.google.gms.google-services' // Asegúrate de aplicar este plugin
+    id 'com.google.gms.google-services'
 }
 
 def localProperties = new Properties()
@@ -63,8 +62,8 @@ flutter {
 }
 
 dependencies {
-    implementation platform('com.google.firebase:firebase-bom:30.3.0') // Asegúrate de usar la última versión del bom de Firebase
-    implementation 'com.google.firebase:firebase-auth'
+  /  implementation platform('com.google.firebase:firebase-bom:30.3.0') 
+    implementation 'com.google.firebase:firebase-auth'/
 }
 
-apply plugin: 'com.google.gms.google-services' // Asegúrate de aplicar este plugin al final del archivo
+apply plugin: 'com.google.gms.google-services'
