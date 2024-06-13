@@ -1,5 +1,9 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
+import 'Screens/login_screen.dart';
+import 'Screens/faucet_screen.dart';
+import 'Screens/light_screen.dart';
+import 'Screens/fall_screen.dart';
+import 'Screens/settings_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,64 +17,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         textTheme: TextTheme(
-          bodyText1: TextStyle(fontSize: 18.0),
-          bodyText2: TextStyle(fontSize: 18.0),
+          bodyLarge: TextStyle(fontSize: 18.0),
+          bodyMedium: TextStyle(fontSize: 18.0),
         ),
       ),
       home: LoginScreen(),
-    );
-  }
-}
-
-class LoginScreen extends StatelessWidget {
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Login', style: TextStyle(fontSize: 24)),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              controller: _usernameController,
-              decoration: InputDecoration(labelText: 'Username', labelStyle: TextStyle(fontSize: 20)),
-            ),
-            SizedBox(height: 20),
-            TextField(
-              controller: _passwordController,
-              decoration: InputDecoration(labelText: 'Password', labelStyle: TextStyle(fontSize: 20)),
-              obscureText: true,
-            ),
-            SizedBox(height: 40),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => HomeScreen(
-                      username: _usernameController.text,
-                      password: _passwordController.text,
-                    ),
-                  ),
-                );
-              },
-              child: Text('Login', style: TextStyle(fontSize: 20)),
-              style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
@@ -89,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
   static List<Widget> _widgetOptions = <Widget>[
-    TapScreen(),
+    FaucetScreen(),
     LightScreen(),
     FallSensorScreen(),
   ];
@@ -145,169 +96,6 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: _onItemTapped,
         iconSize: 36,
         selectedFontSize: 20,
-      ),
-    );
-  }
-}
-
-class TapScreen extends StatefulWidget {
-  @override
-  _TapScreenState createState() => _TapScreenState();
-}
-
-class _TapScreenState extends State<TapScreen> {
-  double _value = 0.0;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Grifo Control', style: TextStyle(fontSize: 24)),
-          SizedBox(height: 20),
-          Slider(
-            value: _value,
-            min: 0,
-            max: 2,
-            divisions: 2,
-            onChanged: (value) {
-              setState(() {
-                _value = value;
-              });
-            },
-          ),
-          SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              // Emergency action
-            },
-            child: Text('Emergency', style: TextStyle(fontSize: 20)),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.red,
-              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-          ),
-          SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              setState(() {
-                _value = 0.0;
-              });
-            },
-            child: Text('Stop', style: TextStyle(fontSize: 20)),
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class LightScreen extends StatefulWidget {
-  @override
-  _LightScreenState createState() => _LightScreenState();
-}
-
-class _LightScreenState extends State<LightScreen> {
-  double _lightValue = 0.0;
-  late Timer _timer;
-
-  @override
-  void initState() {
-    super.initState();
-    // Simulate light sensor data update
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      setState(() {
-        _lightValue = (_lightValue + 10) % 100; // Simulating light sensor data
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    _timer.cancel();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Nivel de Luz', style: TextStyle(fontSize: 24)),
-          SizedBox(height: 20),
-          Icon(Icons.wb_sunny, size: 100, color: Colors.yellow),
-          SizedBox(height: 20),
-          Text('Lux: ${_lightValue.toStringAsFixed(2)}', style: TextStyle(fontSize: 20)),
-        ],
-      ),
-    );
-  }
-}
-
-class FallSensorScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Sensor de Caída', style: TextStyle(fontSize: 24)),
-          SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              // Logic for detecting fall and triggering notification
-            },
-            child: Text('Simular Caída', style: TextStyle(fontSize: 20)),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.orange,
-              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class SettingsScreen extends StatelessWidget {
-  final String username;
-  final String password;
-
-  SettingsScreen({required this.username, required this.password});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Settings', style: TextStyle(fontSize: 24)),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Username: $username', style: TextStyle(fontSize: 20)),
-            SizedBox(height: 20),
-            Text('Password: $password', style: TextStyle(fontSize: 20)),
-          ],
-        ),
       ),
     );
   }
