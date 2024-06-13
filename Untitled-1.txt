@@ -1,0 +1,924 @@
+{
+  "items": [
+    {
+      "device": "com.mango.barcelonaarea.racat90.readers.deviceCX3YWW.reader",
+      "devid": "readers.deviceCX3YWW.reader",
+      "devname": "-",
+      "devretailer": "mango",
+      "devstore": "racat90",
+      "devtype": "-",
+      "log_date": 1718201168621,
+      "logdata": "",
+      "logextra": {
+        "id": "KTjcMAnmb2RIaPy",
+        "items": [
+          {
+            "code": "8447144297231",
+            "epc": "30360392a01d06c4020009e6",
+            "serial": "17213426150",
+            "timestamp": 1718200866365
+          },
+          {
+            "code": "8447144096841",
+            "epc": "30360392a009750402000b40",
+            "serial": "17213426496",
+            "timestamp": 1718200867456
+          },
+          {
+            "code": "8447144320755",
+            "epc": "30360392a01f52c404000220",
+            "serial": "17246978592",
+            "timestamp": 1718200886349
+          },
+          {
+            "code": "8447034559562",
+            "epc": "30360390e836a504060003c0",
+            "serial": "17280533440",
+            "timestamp": 1718201015376
+          },
+          {
+            "code": "8434355458230",
+            "epc": "303602cacc2cbfc0018bef70",
+            "serial": "25948016",
+            "timestamp": 1718201017368
+          },
+          {
+            "code": "8447034719485",
+            "epc": "30360390e84643040600c8cc",
+            "serial": "17280583884",
+            "timestamp": 1718201144345
+          },
+          {
+            "code": "8447144324319",
+            "epc": "30360392a01fabc404000843",
+            "serial": "17246980163",
+            "timestamp": 1718201145348
+          }
+        ],
+        "machine_": "CX3YWW",
+        "rec_": 1718201168615,
+        "starttimestamp": 1718200866364
+      },
+      "logtype": "read",
+      "timestamp": 1718201168615
+    },
+    {
+      "device": "com.mango.barcelonaarea.racat90.readers.deviceCX3YWW.reader",
+      "devid": "readers.deviceCX3YWW.reader",
+      "devname": "-",
+      "devretailer": "mango",
+      "devstore": "racat90",
+      "devtype": "-",
+      "log_date": 1718201490480,
+      "logdata": "",
+      "logextra": {
+        "id": "z8EZfL4MhyXv40T",
+        "items": [
+          {
+            "code": "8447144300337",
+            "epc": "30360392a01d544402000ea7",
+            "serial": "17213427367",
+            "timestamp": 1718201189334
+          },
+          {
+            "code": "8447144261416",
+            "epc": "30360392a01987440400082a",
+            "serial": "17246980138",
+            "timestamp": 1718201190349
+          },
+          {
+            "code": "8445922510053",
+            "epc": "3036037f8831cf440200004d",
+            "serial": "17213423693",
+            "timestamp": 1718201282352
+          },
+          {
+            "code": "8447144254357",
+            "epc": "30360392a018d6c40200005b",
+            "serial": "17213423707",
+            "timestamp": 1718201313353
+          },
+          {
+            "code": "8447144254340",
+            "epc": "30360392a018d68402000c38",
+            "serial": "17213426744",
+            "timestamp": 1718201314356
+          },
+          {
+            "code": "8056008599130",
+            "epc": "3035ebb3203a82480004039e",
+            "serial": "34360001438",
+            "timestamp": 1718201316351
+          },
+          {
+            "code": "8056008599512",
+            "epc": "3035ebb3203a8bc800042051",
+            "serial": "34360008785",
+            "timestamp": 1718201317432
+          },
+          {
+            "code": "8447144280509",
+            "epc": "30360392a01b648406000380",
+            "serial": "17280533376",
+            "timestamp": 1718201380340
+          }
+        ],
+        "machine_": "CX3YWW",
+        "rec_": 1718201490468,
+        "starttimestamp": 1718201189333
+      },
+      "logtype": "read",
+      "timestamp": 1718201490468
+    },
+    {
+      "device": "com.mango.barcelonaarea.racat90.readers.deviceCX3YWW.reader",
+      "devid": "readers.deviceCX3YWW.reader",
+      "devname": "-",
+      "devretailer": "mango",
+      "devstore": "racat90",
+      "devtype": "-",
+      "log_date": 1718201792501,
+      "logdata": "",
+      "logextra": {
+        "id": "EU4ZNvLPj7oRSoj",
+        "items": [
+          {
+            "code": "8447034813725",
+            "epc": "30360390e84f7704020006bd",
+            "serial": "17213425341",
+            "timestamp": 1718201491345
+          },
+          {
+            "code": "8447144108834",
+            "epc": "30360392a00aa0c4060001fc",
+            "serial": "17280532988",
+            "timestamp": 1718201527356
+          },
+          {
+            "code": "8447144120539",
+            "epc": "30360392a00bc54406000983",
+            "serial": "17280534915",
+            "timestamp": 1718201541326
+          },
+          {
+            "code": "8447034964335",
+            "epc": "30360390e85e2c44060093d3",
+            "serial": "17280570323",
+            "timestamp": 1718201589330
+          },
+          {
+            "code": "88434521955866",
+            "epc": "301602cd676a988005f5e558",
+            "serial": "100001112",
+            "timestamp": 1718201701621
+          },
+          {
+            "code": "7321734905748",
+            "epc": "303acb0341df13a0a8e6bf71",
+            "serial": "140272648049",
+            "timestamp": 1718201720387
+          },
+          {
+            "code": "7321733722575",
+            "epc": "303acb03416b885c7ac9f3ae",
+            "serial": "122319139758",
+            "timestamp": 1718201721338
+          },
+          {
+            "code": "8447144535852",
+            "epc": "30360392a03454440400080a",
+            "serial": "17246980106",
+            "timestamp": 1718201783347
+          },
+          {
+            "code": "8447144072814",
+            "epc": "30360392a0071c4402002e9e",
+            "serial": "17213435550",
+            "timestamp": 1718201783472
+          }
+        ],
+        "machine_": "CX3YWW",
+        "rec_": 1718201792489,
+        "starttimestamp": 1718201491344
+      },
+      "logtype": "read",
+      "timestamp": 1718201792489
+    },
+    {
+      "device": "com.mango.barcelonaarea.racat90.readers.deviceCX3YWW.reader",
+      "devid": "readers.deviceCX3YWW.reader",
+      "devname": "-",
+      "devretailer": "mango",
+      "devstore": "racat90",
+      "devtype": "-",
+      "log_date": 1718202122501,
+      "logdata": "",
+      "logextra": {
+        "id": "y2hmRjgmPbSZQhs",
+        "items": [
+          {
+            "code": "8447034917102",
+            "epc": "30360390e8598f8404000288",
+            "serial": "17246978696",
+            "timestamp": 1718201821330
+          },
+          {
+            "code": "8447034443571",
+            "epc": "30360390e82b514404000224",
+            "serial": "17246978596",
+            "timestamp": 1718201822703
+          },
+          {
+            "code": "7321734776584",
+            "epc": "303acb0341d27699d8b6f8d9",
+            "serial": "111010052313",
+            "timestamp": 1718201825333
+          },
+          {
+            "code": "8447144300306",
+            "epc": "30360392a01d53840200124e",
+            "serial": "17213428302",
+            "timestamp": 1718201855346
+          },
+          {
+            "code": "8447144339757",
+            "epc": "30360392a0212dc402000031",
+            "serial": "17213423665",
+            "timestamp": 1718201975336
+          },
+          {
+            "code": "3583787664827",
+            "epc": "30395dfa82ec8480000e4532",
+            "serial": "935218",
+            "timestamp": 1718201982436
+          },
+          {
+            "code": "8447034643322",
+            "epc": "30360390e83ed3040600a225",
+            "serial": "17280573989",
+            "timestamp": 1718201984342
+          },
+          {
+            "code": "8447144566153",
+            "epc": "30360392a03749c406001643",
+            "serial": "17280538179",
+            "timestamp": 1718202012345
+          },
+          {
+            "code": "4049077723319",
+            "epc": "3034f722d446a2c262ce6f3b",
+            "serial": "10247630651",
+            "timestamp": 1718202113334
+          },
+          {
+            "code": "3608390721023",
+            "epc": "30396061c046698000006279",
+            "serial": "25209",
+            "timestamp": 1718202114418
+          },
+          {
+            "code": "3608390721009",
+            "epc": "30396061c046690000092ff9",
+            "serial": "602105",
+            "timestamp": 1718202114511
+          }
+        ],
+        "machine_": "CX3YWW",
+        "rec_": 1718202122481,
+        "starttimestamp": 1718201821329
+      },
+      "logtype": "read",
+      "timestamp": 1718202122481
+    },
+    {
+      "device": "com.mango.barcelonaarea.racat90.readers.deviceCX3YWW.reader",
+      "devid": "readers.deviceCX3YWW.reader",
+      "devname": "-",
+      "devretailer": "mango",
+      "devstore": "racat90",
+      "devtype": "-",
+      "log_date": 1718202450540,
+      "logdata": "",
+      "logextra": {
+        "id": "grDnQGPFjWI7qdD",
+        "items": [
+          {
+            "code": "8447144539089",
+            "epc": "30360392a034a50406001312",
+            "serial": "17280537362",
+            "timestamp": 1718202149335
+          },
+          {
+            "epc": "001744186762134000000009",
+            "timestamp": 1718202176357
+          },
+          {
+            "code": "8055130209962",
+            "epc": "3035eba5681481004190ad50",
+            "serial": "1100000592",
+            "timestamp": 1718202289335
+          },
+          {
+            "code": "8447144254579",
+            "epc": "30360392a018dc4402003fbb",
+            "serial": "17213439931",
+            "timestamp": 1718202389330
+          },
+          {
+            "code": "3608439511257",
+            "epc": "30396062c3a0d5400009ad4b",
+            "serial": "634187",
+            "timestamp": 1718202405322
+          }
+        ],
+        "machine_": "CX3YWW",
+        "rec_": 1718202450535,
+        "starttimestamp": 1718202149334
+      },
+      "logtype": "read",
+      "timestamp": 1718202450534
+    },
+    {
+      "device": "com.mango.barcelonaarea.racat90.readers.deviceCX3YWW.reader",
+      "devid": "readers.deviceCX3YWW.reader",
+      "devname": "-",
+      "devretailer": "mango",
+      "devstore": "racat90",
+      "devtype": "-",
+      "log_date": 1718202802491,
+      "logdata": "",
+      "logextra": {
+        "id": "h3HcSlKOs4fau4g",
+        "items": [
+          {
+            "code": "8447144254579",
+            "epc": "30360392a018dc4402003fba",
+            "serial": "17213439930",
+            "timestamp": 1718202500354
+          },
+          {
+            "code": "8447144135205",
+            "epc": "30360392a00d340402000178",
+            "serial": "17213423992",
+            "timestamp": 1718202610401
+          },
+          {
+            "code": "8447144150161",
+            "epc": "30360392a00eaa0406000390",
+            "serial": "17280533392",
+            "timestamp": 1718202611325
+          },
+          {
+            "code": "8447034602602",
+            "epc": "30360390e83ad9040600020b",
+            "serial": "17280533003",
+            "timestamp": 1718202710328
+          },
+          {
+            "code": "8447144188829",
+            "epc": "30360392a012708404000732",
+            "serial": "17246979890",
+            "timestamp": 1718202711321
+          },
+          {
+            "code": "8447144166544",
+            "epc": "30360392a010438406001605",
+            "serial": "17280538117",
+            "timestamp": 1718202711395
+          },
+          {
+            "code": "8447034524393",
+            "epc": "30360390e83335c406000721",
+            "serial": "17280534305",
+            "timestamp": 1718202725339
+          },
+          {
+            "code": "8447144329611",
+            "epc": "30360392a02030440600000c",
+            "serial": "17280532492",
+            "timestamp": 1718202726333
+          },
+          {
+            "code": "8447144744674",
+            "epc": "30360392a048b8c402000824",
+            "serial": "17213425700",
+            "timestamp": 1718202728370
+          },
+          {
+            "code": "8447144194387",
+            "epc": "30360392a012fb84020027e0",
+            "serial": "17213433824",
+            "timestamp": 1718202728485
+          }
+        ],
+        "machine_": "CX3YWW",
+        "rec_": 1718202802475,
+        "starttimestamp": 1718202500353
+      },
+      "logtype": "read",
+      "timestamp": 1718202802475
+    },
+    {
+      "device": "com.mango.barcelonaarea.racat90.readers.deviceCX3YWW.reader",
+      "devid": "readers.deviceCX3YWW.reader",
+      "devname": "-",
+      "devretailer": "mango",
+      "devstore": "racat90",
+      "devtype": "-",
+      "log_date": 1718203170582,
+      "logdata": "",
+      "logextra": {
+        "id": "QjywJaGXa25ais1",
+        "items": [
+          {
+            "epc": "001653922953688000000046",
+            "timestamp": 1718202869320
+          },
+          {
+            "code": "7321732275607",
+            "epc": "303acb0340de3a20a0d3e767",
+            "serial": "140137195367",
+            "timestamp": 1718202883418
+          },
+          {
+            "code": "7321733898393",
+            "epc": "303acb03417cb3e0a4c29358",
+            "serial": "140203168600",
+            "timestamp": 1718202883485
+          },
+          {
+            "code": "7321736141397",
+            "epc": "303acb034257bedac688e9e8",
+            "serial": "115000011240",
+            "timestamp": 1718202884327
+          },
+          {
+            "code": "196605462524",
+            "epc": "30340bfff42d2b3e1199e404",
+            "serial": "266583270404",
+            "timestamp": 1718202884401
+          },
+          {
+            "code": "8447034905932",
+            "epc": "30360390e8587844060007eb",
+            "serial": "17280534507",
+            "timestamp": 1718202886381
+          },
+          {
+            "code": "18445648086952",
+            "epc": "3016037b406a25c005f5e1b0",
+            "serial": "100000176",
+            "timestamp": 1718202927331
+          },
+          {
+            "code": "8447034166357",
+            "epc": "30360390e8103ec406000547",
+            "serial": "17280533831",
+            "timestamp": 1718202938335
+          },
+          {
+            "code": "8447144088723",
+            "epc": "30360392a008aa0404000b8c",
+            "serial": "17246981004",
+            "timestamp": 1718202938413
+          },
+          {
+            "code": "8447144089232",
+            "epc": "30360392a008b6c4040004e7",
+            "serial": "17246979303",
+            "timestamp": 1718202938490
+          },
+          {
+            "code": "8447034444165",
+            "epc": "30360390e82b600404002b04",
+            "serial": "17246989060",
+            "timestamp": 1718203004340
+          },
+          {
+            "code": "8447144600154",
+            "epc": "30360392a03a9bc40600094d",
+            "serial": "17280534861",
+            "timestamp": 1718203055340
+          },
+          {
+            "code": "8447144355405",
+            "epc": "30360392a022b50406000326",
+            "serial": "17280533286",
+            "timestamp": 1718203057337
+          },
+          {
+            "code": "8447144041193",
+            "epc": "30360392a00405c40400009d",
+            "serial": "17246978205",
+            "timestamp": 1718203058361
+          },
+          {
+            "code": "8447144611877",
+            "epc": "30360392a03bc0c40200011b",
+            "serial": "17213423899",
+            "timestamp": 1718203058453
+          }
+        ],
+        "machine_": "CX3YWW",
+        "rec_": 1718203170574,
+        "starttimestamp": 1718202869320
+      },
+      "logtype": "read",
+      "timestamp": 1718203170573
+    },
+    {
+      "device": "com.mango.barcelonaarea.racat90.readers.deviceCX3YWW.reader",
+      "devid": "readers.deviceCX3YWW.reader",
+      "devname": "-",
+      "devretailer": "mango",
+      "devstore": "racat90",
+      "devtype": "-",
+      "log_date": 1718203502952,
+      "logdata": "",
+      "logextra": {
+        "id": "evWx04iFL1RQZyw",
+        "items": [
+          {
+            "code": "8447034632135",
+            "epc": "30360390e83dbb440400100a",
+            "serial": "17246982154",
+            "timestamp": 1718203201347
+          },
+          {
+            "code": "8447144329536",
+            "epc": "30360392a0202e44060008ff",
+            "serial": "17280534783",
+            "timestamp": 1718203204336
+          },
+          {
+            "code": "8447144258706",
+            "epc": "30360392a019438404000019",
+            "serial": "17246978073",
+            "timestamp": 1718203205354
+          },
+          {
+            "code": "8447144135205",
+            "epc": "30360392a00d340402000231",
+            "serial": "17213424177",
+            "timestamp": 1718203266335
+          },
+          {
+            "code": "8447144077673",
+            "epc": "30360392a00795c4020001bb",
+            "serial": "17213424059",
+            "timestamp": 1718203267339
+          },
+          {
+            "code": "8447034821645",
+            "epc": "30360390e8503d0402002249",
+            "serial": "17213432393",
+            "timestamp": 1718203276342
+          },
+          {
+            "code": "8050457309265",
+            "epc": "3035eb5c641e338800040dde",
+            "serial": "34360004062",
+            "timestamp": 1718203280356
+          },
+          {
+            "code": "8056008407725",
+            "epc": "3035ebb32027d10800041afb",
+            "serial": "34360007419",
+            "timestamp": 1718203283353
+          },
+          {
+            "code": "8050457309265",
+            "epc": "3035eb5c641e3388000409aa",
+            "serial": "34360002986",
+            "timestamp": 1718203284356
+          },
+          {
+            "code": "8447144069050",
+            "epc": "30360392a006be4404000352",
+            "serial": "17246978898",
+            "timestamp": 1718203357347
+          },
+          {
+            "code": "8447144139883",
+            "epc": "30360392a00da90406001474",
+            "serial": "17280537716",
+            "timestamp": 1718203409347
+          }
+        ],
+        "machine_": "CX3YWW",
+        "rec_": 1718203502944,
+        "starttimestamp": 1718203201346
+      },
+      "logtype": "read",
+      "timestamp": 1718203502943
+    },
+    {
+      "device": "com.mango.barcelonaarea.racat90.readers.deviceCX3YWW.reader",
+      "devid": "readers.deviceCX3YWW.reader",
+      "devname": "-",
+      "devretailer": "mango",
+      "devstore": "racat90",
+      "devtype": "-",
+      "log_date": 1718203958640,
+      "logdata": "",
+      "logextra": {
+        "id": "tDu3WLbZDjRKP33",
+        "items": [
+          {
+            "code": "8056255416167",
+            "epc": "3035ebb6fc28a4004190ab3b",
+            "serial": "1100000059",
+            "timestamp": 1718203657413
+          },
+          {
+            "code": "196609218905",
+            "epc": "30340c00041560ba5c6cb804",
+            "serial": "250658732036",
+            "timestamp": 1718203657503
+          },
+          {
+            "code": "8447034962829",
+            "epc": "30360390e85e068404000254",
+            "serial": "17246978644",
+            "timestamp": 1718203695335
+          },
+          {
+            "code": "8447034977052",
+            "epc": "30360390e85f6a4408006e99",
+            "serial": "17314115225",
+            "timestamp": 1718203708337
+          },
+          {
+            "code": "8447144095660",
+            "epc": "30360392a0095784020014db",
+            "serial": "17213428955",
+            "timestamp": 1718203710347
+          },
+          {
+            "code": "8447034392282",
+            "epc": "30360390e8264f040600a3b7",
+            "serial": "17280574391",
+            "timestamp": 1718203715345
+          },
+          {
+            "code": "8447034643278",
+            "epc": "30360390e83ed1c406009ef1",
+            "serial": "17280573169",
+            "timestamp": 1718203715420
+          },
+          {
+            "code": "8447144267210",
+            "epc": "30360392a01a184408001c5a",
+            "serial": "17314094170",
+            "timestamp": 1718203742468
+          },
+          {
+            "code": "8447144097169",
+            "epc": "30360392a0097d040200038c",
+            "serial": "17213424524",
+            "timestamp": 1718203745459
+          },
+          {
+            "code": "7321734866834",
+            "epc": "303acb0341db46dc75e04349",
+            "serial": "122236715849",
+            "timestamp": 1718203746475
+          },
+          {
+            "code": "8445574224674",
+            "epc": "3036037a1815f0c000000030",
+            "serial": "48",
+            "timestamp": 1718203747384
+          },
+          {
+            "epc": "3035ebdf782e1d800802e4b203000000",
+            "timestamp": 1718203748515
+          },
+          {
+            "epc": "3035ebdf782e18400815391c03000000",
+            "timestamp": 1718203748616
+          },
+          {
+            "code": "8059077240859",
+            "epc": "3035ebe31417854800043c0a",
+            "serial": "34360015882",
+            "timestamp": 1718203748698
+          },
+          {
+            "code": "8058846454275",
+            "epc": "3035ebdf782c5cc800046708",
+            "serial": "34360026888",
+            "timestamp": 1718203750580
+          },
+          {
+            "code": "8052678548348",
+            "epc": "3035eb7f18358c8800042a4f",
+            "serial": "34360011343",
+            "timestamp": 1718203750667
+          },
+          {
+            "code": "8059077241009",
+            "epc": "3035ebe314178908000411f0",
+            "serial": "34360005104",
+            "timestamp": 1718203750761
+          },
+          {
+            "epc": "3035ebe3141788400215d8df03000000",
+            "timestamp": 1718203752719
+          },
+          {
+            "code": "8058846472019",
+            "epc": "3035ebdf782e1848000751b5",
+            "serial": "34360218037",
+            "timestamp": 1718203752950
+          },
+          {
+            "code": "8050664709742",
+            "epc": "3035eb5fa0454f8800041122",
+            "serial": "34360004898",
+            "timestamp": 1718203753040
+          },
+          {
+            "code": "8056008130227",
+            "epc": "3035ebb3200cb78800043fd4",
+            "serial": "34360016852",
+            "timestamp": 1718203753416
+          },
+          {
+            "code": "7321735713014",
+            "epc": "303acb03422de95ac688cc51",
+            "serial": "115000003665",
+            "timestamp": 1718203754537
+          },
+          {
+            "code": "8447144110820",
+            "epc": "30360392a00ad284060008a5",
+            "serial": "17280534693",
+            "timestamp": 1718203756459
+          },
+          {
+            "code": "8447144166711",
+            "epc": "30360392a01047c402000a41",
+            "serial": "17213426241",
+            "timestamp": 1718203885382
+          },
+          {
+            "code": "8447144566153",
+            "epc": "30360392a03749c406001643",
+            "serial": "17280538179",
+            "timestamp": 1718203885518
+          },
+          {
+            "code": "8447144166698",
+            "epc": "30360392a010474402000c21",
+            "serial": "17213426721",
+            "timestamp": 1718203886396
+          },
+          {
+            "code": "8447144059150",
+            "epc": "30360392a005c6c404000352",
+            "serial": "17246978898",
+            "timestamp": 1718203910411
+          },
+          {
+            "code": "8447144078021",
+            "epc": "30360392a0079e84040003cc",
+            "serial": "17246979020",
+            "timestamp": 1718203911402
+          },
+          {
+            "code": "8447034778697",
+            "epc": "30360390e84c0b4404001662",
+            "serial": "17246983778",
+            "timestamp": 1718203911500
+          },
+          {
+            "code": "8447144648231",
+            "epc": "30360392a03f4dc40200039d",
+            "serial": "17213424541",
+            "timestamp": 1718203913381
+          },
+          {
+            "code": "3608439333194",
+            "epc": "30396062c38f71c00009e1e3",
+            "serial": "647651",
+            "timestamp": 1718203943378
+          },
+          {
+            "code": "8447144291161",
+            "epc": "30360392a01c6f0406000f6a",
+            "serial": "17280536426",
+            "timestamp": 1718203947478
+          },
+          {
+            "code": "8447144121109",
+            "epc": "30360392a00bd38402000672",
+            "serial": "17213425266",
+            "timestamp": 1718203947575
+          },
+          {
+            "code": "8447034643322",
+            "epc": "30360390e83ed30406005dac",
+            "serial": "17280556460",
+            "timestamp": 1718203953474
+          },
+          {
+            "code": "8447034915931",
+            "epc": "30360390e85972440600084b",
+            "serial": "17280534603",
+            "timestamp": 1718203954394
+          },
+          {
+            "code": "8447144284392",
+            "epc": "30360392a01bc5c408003fc9",
+            "serial": "17314103241",
+            "timestamp": 1718203954496
+          }
+        ],
+        "machine_": "CX3YWW",
+        "rec_": 1718203958617,
+        "starttimestamp": 1718203657412
+      },
+      "logtype": "read",
+      "timestamp": 1718203958617
+    },
+    {
+      "device": "com.mango.barcelonaarea.racat90.readers.deviceCX3YWW.reader",
+      "devid": "readers.deviceCX3YWW.reader",
+      "devname": "-",
+      "devretailer": "mango",
+      "devstore": "racat90",
+      "devtype": "-",
+      "log_date": 1718204342516,
+      "logdata": "",
+      "logextra": {
+        "id": "tTz59tJ1gl2DFee",
+        "items": [
+          {
+            "code": "8447034632418",
+            "epc": "30360390e83dc24406000c2d",
+            "serial": "17280535597",
+            "timestamp": 1718204041389
+          },
+          {
+            "code": "8447144284262",
+            "epc": "30360392a01bc284020024a9",
+            "serial": "17213433001",
+            "timestamp": 1718204080386
+          },
+          {
+            "code": "8447144121062",
+            "epc": "30360392a00bd28402000f9f",
+            "serial": "17213427615",
+            "timestamp": 1718204197380
+          },
+          {
+            "code": "8447144138688",
+            "epc": "30360392a00d8b0408001fc3",
+            "serial": "17314095043",
+            "timestamp": 1718204288379
+          },
+          {
+            "code": "8447144138701",
+            "epc": "30360392a00d8b84080003c5",
+            "serial": "17314087877",
+            "timestamp": 1718204291427
+          },
+          {
+            "code": "8057590729738",
+            "epc": "3035ebcbd84743404190acce",
+            "serial": "1100000462",
+            "timestamp": 1718204332391
+          },
+          {
+            "code": "3608409856272",
+            "epc": "3039606203c286c1d1086a7e",
+            "serial": "7801956990",
+            "timestamp": 1718204334539
+          },
+          {
+            "code": "8447144396781",
+            "epc": "30360392a026bf84040005a0",
+            "serial": "17246979488",
+            "timestamp": 1718204334643
+          },
+          {
+            "code": "8447144509341",
+            "epc": "30360392a031bd8404000105",
+            "serial": "17246978309",
+            "timestamp": 1718204334752
+          },
+          {
+            "epc": "494e424e3233343530373500",
+            "timestamp": 1718204337457
+          }
+        ],
+        "machine_": "CX3YWW",
+        "rec_": 1718204342508,
+        "starttimestamp": 1718204041389
+      },
+      "logtype": "read",
+      "timestamp": 1718204342507
+    }
+  ]
+}
