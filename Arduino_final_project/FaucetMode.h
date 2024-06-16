@@ -5,6 +5,7 @@
 
 // Function declarations
 void setupFaucet();
-void updateFaucet();
+void updateFaucet(int modefaucet);
+void manualFaucet();
 
 #endif // FAUCETMODE_H

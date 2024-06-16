@@ -1,19 +1,20 @@
 // LightMode.cpp
 
 #include "LightMode.h"
+#include "FirebaseGlobal.h"
 #include <Arduino.h>
 
 // Definición de variables
-const int buttonPin = D1;
+const int buttonPin = D4;
 const int LED = D0;
 int mode = 0;
 
 BH1750 lightsensor;
 char input;
 
+
 void setupLEDControl() {
     
-
     Wire.begin(4, 5); // SDA al pin D2 y SCL al pin D1
     lightsensor.begin();
     pinMode(buttonPin, INPUT);
@@ -21,15 +22,17 @@ void setupLEDControl() {
     delay(50);
 }
 
-void autoLED() { // Modo automático
+int autoLED() { // Modo automático
     uint16_t lux = lightsensor.readLightLevel();
     Serial.print("Light: ");
     Serial.print(lux);
     Serial.println(" lx");
     // La función map adapta los valores del rango del sensor a los del rango del LED.
     int bright = map(lux, 0, 65535, 255, 0); // Está como 255,0 para invertir los rangos y hacer LED ON cuando hay poca luz
+    int lightlevel = map(lux, 0, 65535, 0, 255);
     analogWrite(LED, bright);
     delay(500);
+    return lightlevel;
 }
 
 void manualLED() { // Modo manual de 4 intensidades

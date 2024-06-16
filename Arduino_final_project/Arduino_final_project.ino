@@ -5,6 +5,7 @@
 #include "LightMode.h"
 #include "FallMode.h"
 #include "FaucetMode.h"
+#include "FirebaseGlobal.h"
 
 #include <addons/TokenHelper.h>
 #include <addons/RTDBHelper.h>
@@ -28,6 +29,7 @@
 // Define Firebase Data objects
 FirebaseData stream1;
 FirebaseData stream2;
+FirebaseData stream3;
 FirebaseData fbdo;
 
 FirebaseAuth auth;
@@ -35,8 +37,13 @@ FirebaseConfig config;
 
 unsigned long sendDataPrevMillis = 0;
 int count = 0;
-volatile bool dataChanged = false;
+volatile bool dataChangedLight = false;
+volatile bool dataChangedMode = false;
+volatile bool dataChangedFaucet = false;
 int modolight = -1;
+int modefaucet = 0;
+int modeused = -1;
+int lightlevel = -1;
 
 void streamCallback1(StreamData data) {
   Serial.printf("Stream1 path: %s\nEvent path: %s\nData type: %s\nEvent type: %s\n\n",
@@ -49,7 +56,7 @@ void streamCallback1(StreamData data) {
   Serial.println();
 
   Serial.printf("Received stream payload size: %d (Max. %d)\n\n", data.payloadLength(), data.maxPayloadLength());
-  dataChanged = true;
+  dataChangedLight = true;
 }
 
 void streamCallback2(StreamData data) {
@@ -59,6 +66,20 @@ void streamCallback2(StreamData data) {
                 data.dataType().c_str(),
                 data.eventType().c_str());
   printResult(data); // see addons/RTDBHelper.h
+  modeused = data.intData();
+  dataChangedMode = true;
+  // Handle the data for the second stream
+}
+
+void streamCallback3(StreamData data) {
+  Serial.printf("Stream3 path: %s\nEvent path: %s\nData type: %s\nEvent type: %s\n\n",
+                data.streamPath().c_str(),
+                data.dataPath().c_str(),
+                data.dataType().c_str(),
+                data.eventType().c_str());
+  printResult(data); // see addons/RTDBHelper.h
+  modefaucet = data.intData();
+  dataChangedFaucet = true;
   // Handle the data for the second stream
 }
 
@@ -76,6 +97,14 @@ void streamTimeoutCallback2(bool timeout) {
 
   if (!stream2.httpConnected())
     Serial.printf("Error code: %d, reason: %s\n\n", stream2.httpCode(), stream2.errorReason().c_str());
+}
+
+void streamTimeoutCallback3(bool timeout) {
+  if (timeout)
+    Serial.println("Stream3 timed out, resuming...\n");
+
+  if (!stream3.httpConnected())
+    Serial.printf("Error code: %d, reason: %s\n\n", stream3.httpCode(), stream3.errorReason().c_str());
 }
 
 void setup() {
@@ -118,36 +147,63 @@ void setup() {
 
     Firebase.begin(&config, &auth);
 
-    if (!Firebase.beginStream(stream1, "/board/modes/light/mode"))
+    /*if (!Firebase.beginStream(stream1, "/board/modes/light/mode"))
       Serial.printf("Stream1 begin error, %s\n\n", stream1.errorReason().c_str());
 
-    Firebase.setStreamCallback(stream1, streamCallback1, streamTimeoutCallback1);
+    Firebase.setStreamCallback(stream1, streamCallback1, streamTimeoutCallback1);*/
 
     if (!Firebase.beginStream(stream2, "/board/modeval"))
       Serial.printf("Stream2 begin error, %s\n\n", stream2.errorReason().c_str());
 
     Firebase.setStreamCallback(stream2, streamCallback2, streamTimeoutCallback2);
+
+    /*if (!Firebase.beginStream(stream3, "/board/modes/faucet/faucetval"))
+      Serial.printf("Stream3 begin error, %s\n\n", stream3.errorReason().c_str());
+
+    Firebase.setStreamCallback(stream3, streamCallback3, streamTimeoutCallback3);*/
 }
 
 void loop() {     
-  if (Firebase.ready() && (millis() - sendDataPrevMillis > 15000 || sendDataPrevMillis == 0)) {
+  /*if (Firebase.ready() && (millis() - sendDataPrevMillis > 15000 || sendDataPrevMillis == 0)) {
     // Handle periodic tasks here
-  }
+    sendDataPrevMillis = millis();
+    count++;
+    FirebaseJson json;
+    json.add("intensity", count);
+    json.add("mode", modolight);
+    Serial.printf("Set json... %s\n\n", Firebase.setJSON(fbdo, "/board/modes/light", json) ? "ok" : fbdo.errorReason().c_str());
+  }*/
 
-  if (dataChanged) {
-    dataChanged = false;
-    if(modolight == 1){
-      autoLED();
+  if (dataChangedMode){
+    dataChangedMode = false;
+  }
+  else{
+    if(modeused == 0){
+      if (dataChangedFaucet) {
+        dataChangedFaucet = false;
+        updateFaucet(modefaucet);
+      } else {
+        manualFaucet();
+      }
     }
-    else if (modolight == 0){
-      manualLED();
-    }
-  } else {
-    if(modolight == 1){
-      autoLED();
-    }
-    else if (modolight == 0){
-      manualLED();
+    else if (modeused == 1){
+      if (dataChangedLight) {
+        dataChangedLight = false;
+        if(modolight == 1){
+          lightlevel = autoLED();
+        }else if (modolight == 0){
+          manualLED();
+        }
+      } else {
+          if(modolight == 1){
+            lightlevel = autoLED();
+          }
+          else if (modolight == 0){
+            manualLED();
+          }
+      }
+    } else if (modeused == 2){
+      loopFallMode();
     }
   }
 
@@ -156,6 +212,10 @@ void loop() {
   }
 
   if (!stream2.httpConnected()) {
+    // Handle stream2 disconnection
+  }
+
+   if (!stream3.httpConnected()) {
     // Handle stream2 disconnection
   }
 }

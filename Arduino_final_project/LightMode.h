@@ -14,7 +14,7 @@ extern BH1750 lightsensor;
 extern char input;
 
 void setupLEDControl();
-void autoLED();
+int autoLED();
 void manualLED();
 
 #endif

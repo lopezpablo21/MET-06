@@ -137,6 +137,11 @@ void setup() {
 void loop() {
   if (Firebase.ready() && (millis() - sendDataPrevMillis > 15000 || sendDataPrevMillis == 0)) {
     // Handle periodic tasks here
+    sendDataPrevMillis = millis();
+    count++;
+    FirebaseJson json;
+    json.add("intensity", count);
+    Serial.printf("Set json... %s\n\n", Firebase.setJSON(fbdo, "/board/modes/light", json) ? "ok" : fbdo.errorReason().c_str());
   }
 
   if (dataChanged) {
