@@ -1,21 +1,12 @@
-/**
- * Created by K. Suwatchai (Mobizt)
- *
- * Email: k_suwatchai@hotmail.com
- *
- * Github: https://github.com/mobizt/Firebase-ESP8266
- *
- * Copyright (c) 2023 mobizt
- *
- */
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 #include <FirebaseESP8266.h>
 
-// Provide the token generation process info.
-#include <addons/TokenHelper.h>
+#include "LightMode.h"
+#include "FallMode.h"
+#include "FaucetMode.h"
 
-// Provide the RTDB payload printing info and other helper functions.
+#include <addons/TokenHelper.h>
 #include <addons/RTDBHelper.h>
 
 /* 1. Define the WiFi credentials */
@@ -45,7 +36,7 @@ FirebaseConfig config;
 unsigned long sendDataPrevMillis = 0;
 int count = 0;
 volatile bool dataChanged = false;
-int modo = -1;
+int modolight = -1;
 
 void streamCallback1(StreamData data) {
   Serial.printf("Stream1 path: %s\nEvent path: %s\nData type: %s\nEvent type: %s\n\n",
@@ -54,7 +45,7 @@ void streamCallback1(StreamData data) {
                 data.dataType().c_str(),
                 data.eventType().c_str());
   printResult(data); // see addons/RTDBHelper.h
-  modo = data.intData();
+  modolight = data.intData();
   Serial.println();
 
   Serial.printf("Received stream payload size: %d (Max. %d)\n\n", data.payloadLength(), data.maxPayloadLength());
@@ -88,62 +79,76 @@ void streamTimeoutCallback2(bool timeout) {
 }
 
 void setup() {
-  Serial.begin(9600);
+    Serial.begin(9600);
 
-  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
-  Serial.print("Connecting to Wi-Fi");
-  unsigned long ms = millis();
-  while (WiFi.status() != WL_CONNECTED) {
-    Serial.print(".");
-    delay(300);
-  }
-  Serial.println();
-  Serial.print("Connected with IP: ");
-  Serial.println(WiFi.localIP());
-  Serial.println();
+    setupFallMode();
+    setupLEDControl(); 
+    setupFaucet();
+    
+    WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+    Serial.print("Connecting to Wi-Fi");
+    unsigned long ms = millis();
+    while (WiFi.status() != WL_CONNECTED) {
+      Serial.print(".");
+      delay(300);
+    }
+    Serial.println();
+    Serial.print("Connected with IP: ");
+    Serial.println(WiFi.localIP());
+    Serial.println();
 
-  Serial.printf("Firebase Client v%s\n\n", FIREBASE_CLIENT_VERSION);
+    Serial.printf("Firebase Client v%s\n\n", FIREBASE_CLIENT_VERSION);
 
   /* Assign the api key (required) */
-  config.api_key = API_KEY;
+    config.api_key = API_KEY;
 
   /* Assign the user sign in credentials */
-  auth.user.email = USER_EMAIL;
-  auth.user.password = USER_PASSWORD;
+    auth.user.email = USER_EMAIL;
+    auth.user.password = USER_PASSWORD;
 
   /* Assign the RTDB URL (required) */
-  config.database_url = DATABASE_URL;
+    config.database_url = DATABASE_URL;
 
   /* Assign the callback function for the long running token generation task */
-  config.token_status_callback = tokenStatusCallback; // see addons/TokenHelper.h
+    config.token_status_callback = tokenStatusCallback; // see addons/TokenHelper.h
 
-  Firebase.reconnectNetwork(true);
+    Firebase.reconnectNetwork(true);
 
-  fbdo.setBSSLBufferSize(4096 /* Rx buffer size in bytes from 512 - 16384 */, 1024 /* Tx buffer size in bytes from 512 - 16384 */);
+    fbdo.setBSSLBufferSize(4096 /* Rx buffer size in bytes from 512 - 16384 */, 1024 /* Tx buffer size in bytes from 512 - 16384 */);
 
-  Firebase.begin(&config, &auth);
+    Firebase.begin(&config, &auth);
 
-  if (!Firebase.beginStream(stream1, "/board/modeval"))
-    Serial.printf("Stream1 begin error, %s\n\n", stream1.errorReason().c_str());
+    if (!Firebase.beginStream(stream1, "/board/modes/light/mode"))
+      Serial.printf("Stream1 begin error, %s\n\n", stream1.errorReason().c_str());
 
-  Firebase.setStreamCallback(stream1, streamCallback1, streamTimeoutCallback1);
+    Firebase.setStreamCallback(stream1, streamCallback1, streamTimeoutCallback1);
 
-  if (!Firebase.beginStream(stream2, "/board/modes/faucet"))
-    Serial.printf("Stream2 begin error, %s\n\n", stream2.errorReason().c_str());
+    if (!Firebase.beginStream(stream2, "/board/modeval"))
+      Serial.printf("Stream2 begin error, %s\n\n", stream2.errorReason().c_str());
 
-  Firebase.setStreamCallback(stream2, streamCallback2, streamTimeoutCallback2);
+    Firebase.setStreamCallback(stream2, streamCallback2, streamTimeoutCallback2);
 }
 
-void loop() {
+void loop() {     
   if (Firebase.ready() && (millis() - sendDataPrevMillis > 15000 || sendDataPrevMillis == 0)) {
     // Handle periodic tasks here
   }
 
   if (dataChanged) {
     dataChanged = false;
-    // When stream data is available, do anything here...
+    if(modolight == 1){
+      autoLED();
+    }
+    else if (modolight == 0){
+      manualLED();
+    }
   } else {
-    //Serial.println(modo);
+    if(modolight == 1){
+      autoLED();
+    }
+    else if (modolight == 0){
+      manualLED();
+    }
   }
 
   if (!stream1.httpConnected()) {
