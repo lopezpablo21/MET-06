@@ -5,14 +5,13 @@ import 'Screens/faucet_screen.dart';
 import 'Screens/light_screen.dart';
 import 'Screens/fall_screen.dart';
 import 'Screens/settings_screen.dart';
+import 'Screens/medicines_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
 }
-
-
 
 class MyApp extends StatelessWidget {
   @override
@@ -48,6 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
     FaucetScreen(),
     LightScreen(),
     FallSensorScreen(),
+    MedicinesScreen(), // Añadir la nueva pantalla a la lista de opciones
   ];
 
   void _onItemTapped(int index) {
@@ -95,6 +95,10 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.warning, color: _selectedIndex == 2 ? Colors.amber[800] : Colors.black),
             label: 'Sensor de Caída',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.medication, color: _selectedIndex == 3 ? Colors.amber[800] : Colors.black),
+            label: 'Medicinas',
+          ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],
@@ -105,6 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
 
 
 
