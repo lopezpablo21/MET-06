@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'Screens/login_screen.dart';
 import 'Screens/faucet_screen.dart';
 import 'Screens/light_screen.dart';
@@ -42,6 +43,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
+  final DatabaseReference _modeValRef = FirebaseDatabase.instance.ref('board/modeval');
 
   static List<Widget> _widgetOptions = <Widget>[
     FaucetScreen(),
@@ -53,7 +55,12 @@ class _HomeScreenState extends State<HomeScreen> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      _updateModeVal(index); // Update Firebase with the new page index
     });
+  }
+
+  void _updateModeVal(int index) {
+    _modeValRef.set(index);
   }
 
   @override
@@ -109,8 +116,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-
-
-
-

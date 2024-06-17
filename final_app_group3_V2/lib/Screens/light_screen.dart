@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'dart:async';
-
-
 
 class LightScreen extends StatefulWidget {
   @override
@@ -9,39 +8,56 @@ class LightScreen extends StatefulWidget {
 }
 
 class _LightScreenState extends State<LightScreen> {
-  double _lightValue = 0.0;
-  late Timer _timer;
+  int _lightValue = 0;
+  final DatabaseReference _lightRef = FirebaseDatabase.instance.ref('board/modes/light/intensity');
+  late StreamSubscription<DatabaseEvent> _lightSubscription;
 
   @override
   void initState() {
     super.initState();
-    // Simulate light sensor data update
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      setState(() {
-        _lightValue = (_lightValue + 10) % 100; // Simulating light sensor data
-      });
+    // Listen for changes in the light intensity value
+    _lightSubscription = _lightRef.onValue.listen((DatabaseEvent event) {
+      if (event.snapshot.value != null) {
+        final int newValue = event.snapshot.value as int;
+        setState(() {
+          _lightValue = newValue;
+        });
+      }
     });
   }
 
   @override
   void dispose() {
-    _timer.cancel();
+    _lightSubscription.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Nivel de Luz', style: TextStyle(fontSize: 24)),
-          SizedBox(height: 20),
-          Icon(Icons.wb_sunny, size: 100, color: Colors.yellow),
-          SizedBox(height: 20),
-          Text('Lux: ${_lightValue.toStringAsFixed(2)}', style: TextStyle(fontSize: 20)),
-        ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Light Control', style: TextStyle(fontSize: 24)),
+        leading: IconButton(
+          icon: Icon(Icons.home),
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, '/main');
+          },
+        ),
+      ),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Nivel de Luz', style: TextStyle(fontSize: 24)),
+              SizedBox(height: 20),
+              Icon(Icons.wb_sunny, size: 100, color: Colors.yellow),
+              SizedBox(height: 20),
+              Text('Lux: $_lightValue', style: TextStyle(fontSize: 20)),
+            ],
+          ),
+        ),
       ),
     );
   }

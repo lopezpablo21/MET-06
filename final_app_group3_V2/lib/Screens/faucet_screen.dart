@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'dart:async';
 
 class FaucetScreen extends StatefulWidget {
   @override
@@ -8,14 +9,33 @@ class FaucetScreen extends StatefulWidget {
 
 class _FaucetScreenState extends State<FaucetScreen> {
   double _value = 0.0;
-  final DatabaseReference _faucetRef = FirebaseDatabase.instance.ref('board/modes/faucet');
+  final DatabaseReference _faucetRef = FirebaseDatabase.instance.ref('/board/modes/faucet/faucetval');
+  late StreamSubscription<DatabaseEvent> _faucetSubscription;
+
+  @override
+  void initState() {
+    super.initState();
+    // Listen for changes in the faucet value
+    _faucetSubscription = _faucetRef.onValue.listen((DatabaseEvent event) {
+      final int newValue = event.snapshot.value as int;
+      setState(() {
+        _value = newValue.toDouble();
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _faucetSubscription.cancel();
+    super.dispose();
+  }
 
   void _updateFaucetValue(double value) {
     _faucetRef.set(value.toInt());
   }
 
   void _emergencyStop() {
-    _faucetRef.set(3);
+    _faucetRef.set(0);
   }
 
   @override
@@ -61,4 +81,3 @@ class _FaucetScreenState extends State<FaucetScreen> {
     );
   }
 }
-
