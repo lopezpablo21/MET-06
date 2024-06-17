@@ -1,4 +1,5 @@
 #include "FallMode.h"
+#include "FirebaseGlobal.h"
 
 // State variables
 bool sensor1State = false;
@@ -7,6 +8,7 @@ bool fallDetected = false;
 
 unsigned long sensor1LastMotionTime = 0;
 unsigned long sensor2LastMotionTime = 0;
+FirebaseJson json;
 
 void setupFallMode() {
   Serial.begin(9600);
@@ -34,12 +36,16 @@ void loopFallMode() {
       digitalWrite(LED_PIN, HIGH);
       Serial.println("Fall detected!");
       fallDetected = true;
+      json.add("falled", fallDetected);
+      Serial.printf("Set json... %s\n\n", Firebase.setJSON(fbdo, "/board/modes/fall", json) ? "ok" : fbdo.errorReason().c_str());
     }
   }
 
   if (!sensor1State && !sensor2State && fallDetected) {
     // Reset fall detection flag and turn off the LED
     fallDetected = false;
+    json.add("falled", fallDetected);
+    Serial.printf("Set json... %s\n\n", Firebase.setJSON(fbdo, "/board/modes/fall", json) ? "ok" : fbdo.errorReason().c_str());
     digitalWrite(LED_PIN, LOW);
     Serial.println("Yaya revived");
   }

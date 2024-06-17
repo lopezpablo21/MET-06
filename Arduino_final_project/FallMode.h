@@ -9,7 +9,7 @@
 #define LED_PIN D0 
 
 // Threshold definition
-#define FALL_THRESHOLD 100 
+#define FALL_THRESHOLD 700 
 
 // Function declarations
 void setupFallMode();

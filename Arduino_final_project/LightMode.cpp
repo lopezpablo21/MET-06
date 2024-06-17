@@ -11,7 +11,7 @@ int mode = 0;
 
 BH1750 lightsensor;
 char input;
-
+bool setdatalight = false;
 
 void setupLEDControl() {
     
@@ -40,6 +40,7 @@ void manualLED() { // Modo manual de 4 intensidades
         int pressed = digitalRead(buttonPin);
         
         if (pressed == HIGH) {
+            setdatalight = true;
             if (mode == 4) {
                 mode = 0;
             } else {
@@ -47,8 +48,58 @@ void manualLED() { // Modo manual de 4 intensidades
             }
             delay(200);
         }
+        else{
+          setdatalight = false;
+        }
 
+        FirebaseJson json;
         switch (mode) {
+            case 0:
+                digitalWrite(LED, LOW);
+                Serial.println("LED APAGADO");
+                if (setdatalight == true){
+                json.add("value", mode);
+                Serial.printf("Set json... %s\n\n", Firebase.setJSON(fbdo, "/board/modes/light/manual", json) ? "ok" : fbdo.errorReason().c_str());
+                }
+                break;
+            case 1:
+                analogWrite(LED, 10);
+                Serial.println("Modo LED 1");
+                if (setdatalight == true){
+                json.add("value", mode);
+                Serial.printf("Set json... %s\n\n", Firebase.setJSON(fbdo, "/board/modes/light/manual", json) ? "ok" : fbdo.errorReason().c_str());
+                }
+                break;
+            case 2:
+                analogWrite(LED, 64);
+                Serial.println("Modo LED 2");
+                if (setdatalight == true){
+                json.add("value", mode);
+                Serial.printf("Set json... %s\n\n", Firebase.setJSON(fbdo, "/board/modes/light/manual", json) ? "ok" : fbdo.errorReason().c_str());
+                }
+                break;
+            case 3:
+                analogWrite(LED, 170);
+                Serial.println("Modo LED 3");
+                if (setdatalight == true){
+                json.add("value", mode);
+                Serial.printf("Set json... %s\n\n", Firebase.setJSON(fbdo, "/board/modes/light/manual", json) ? "ok" : fbdo.errorReason().c_str());
+                }
+                break;
+            case 4:
+                analogWrite(LED, 255);
+                Serial.println("Modo LED 4");
+                if (setdatalight == true){
+                json.add("value", mode);
+                Serial.printf("Set json... %s\n\n", Firebase.setJSON(fbdo, "/board/modes/light/manual", json) ? "ok" : fbdo.errorReason().c_str());
+                }
+                break;
+        }
+}
+
+void updateLED(int updatemode) { // Modo manual de 4 intensidades
+   
+        switch (updatemode) {
             case 0:
                 digitalWrite(LED, LOW);
                 Serial.println("LED APAGADO");
@@ -70,7 +121,4 @@ void manualLED() { // Modo manual de 4 intensidades
                 Serial.println("Modo LED 4");
                 break;
         }
-        
-        // Obtener el modo actual desde Firebase
-    
 }

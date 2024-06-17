@@ -40,10 +40,16 @@ int count = 0;
 volatile bool dataChangedLight = false;
 volatile bool dataChangedMode = false;
 volatile bool dataChangedFaucet = false;
-int modolight = -1;
+volatile bool dataChangedLightMode = false;
+
+int modolight = 0;
 int modefaucet = 0;
 int modeused = -1;
 int lightlevel = -1;
+int lightintense = 0;
+
+bool stream2Active = true;
+bool stream3Active = true;
 
 void streamCallback1(StreamData data) {
   Serial.printf("Stream1 path: %s\nEvent path: %s\nData type: %s\nEvent type: %s\n\n",
@@ -52,36 +58,46 @@ void streamCallback1(StreamData data) {
                 data.dataType().c_str(),
                 data.eventType().c_str());
   printResult(data); // see addons/RTDBHelper.h
-  modolight = data.intData();
+  
   Serial.println();
 
   Serial.printf("Received stream payload size: %d (Max. %d)\n\n", data.payloadLength(), data.maxPayloadLength());
-  dataChangedLight = true;
+  
+    if (strcmp(data.dataPath().c_str(), "/modes/light/mode") == 0) {
+    Serial.println("Data path matches /modes/light/mode");
+    modolight = data.intData();
+    dataChangedLight = true;
+   
+  } else {
+    Serial.println("Data path does not match /modes/light/mode");
+  }
+  if (strcmp(data.dataPath().c_str(), "/modeval") == 0) {
+    Serial.println("Data path matches /modeval");
+    modeused = data.intData();
+    dataChangedMode = true;
+    
+  } else {
+    Serial.println("Data path does not match /board/modeval");
+  }
+  if (strcmp(data.dataPath().c_str(), "/modes/faucet/faucetval") == 0) {
+    Serial.println("Data path matches /modes/faucet/faucetval");
+    modefaucet = data.intData();
+    dataChangedFaucet = true;
+    
+  } else {
+    Serial.println("Data path does not match /modes/faucet/faucetval");
+  }
+  if (strcmp(data.dataPath().c_str(), "/modes/light/manual/value") == 0) {
+    Serial.println("Data path matches /modes/light/manuallight/value");
+    lightintense = data.intData();
+    dataChangedLightMode = true;
+   
+  } else {
+    Serial.println("Data path does not match /modes/light/manuallight/value");
+  }
+
 }
 
-void streamCallback2(StreamData data) {
-  Serial.printf("Stream2 path: %s\nEvent path: %s\nData type: %s\nEvent type: %s\n\n",
-                data.streamPath().c_str(),
-                data.dataPath().c_str(),
-                data.dataType().c_str(),
-                data.eventType().c_str());
-  printResult(data); // see addons/RTDBHelper.h
-  modeused = data.intData();
-  dataChangedMode = true;
-  // Handle the data for the second stream
-}
-
-void streamCallback3(StreamData data) {
-  Serial.printf("Stream3 path: %s\nEvent path: %s\nData type: %s\nEvent type: %s\n\n",
-                data.streamPath().c_str(),
-                data.dataPath().c_str(),
-                data.dataType().c_str(),
-                data.eventType().c_str());
-  printResult(data); // see addons/RTDBHelper.h
-  modefaucet = data.intData();
-  dataChangedFaucet = true;
-  // Handle the data for the second stream
-}
 
 void streamTimeoutCallback1(bool timeout) {
   if (timeout)
@@ -91,21 +107,6 @@ void streamTimeoutCallback1(bool timeout) {
     Serial.printf("Error code: %d, reason: %s\n\n", stream1.httpCode(), stream1.errorReason().c_str());
 }
 
-void streamTimeoutCallback2(bool timeout) {
-  if (timeout)
-    Serial.println("Stream2 timed out, resuming...\n");
-
-  if (!stream2.httpConnected())
-    Serial.printf("Error code: %d, reason: %s\n\n", stream2.httpCode(), stream2.errorReason().c_str());
-}
-
-void streamTimeoutCallback3(bool timeout) {
-  if (timeout)
-    Serial.println("Stream3 timed out, resuming...\n");
-
-  if (!stream3.httpConnected())
-    Serial.printf("Error code: %d, reason: %s\n\n", stream3.httpCode(), stream3.errorReason().c_str());
-}
 
 void setup() {
     Serial.begin(9600);
@@ -147,32 +148,28 @@ void setup() {
 
     Firebase.begin(&config, &auth);
 
-    /*if (!Firebase.beginStream(stream1, "/board/modes/light/mode"))
+    //"/board/modes/light/mode"
+    if (!Firebase.beginStream(stream1, "/board"))
       Serial.printf("Stream1 begin error, %s\n\n", stream1.errorReason().c_str());
 
-    Firebase.setStreamCallback(stream1, streamCallback1, streamTimeoutCallback1);*/
+    Firebase.setStreamCallback(stream1, streamCallback1, streamTimeoutCallback1);
 
-    if (!Firebase.beginStream(stream2, "/board/modeval"))
-      Serial.printf("Stream2 begin error, %s\n\n", stream2.errorReason().c_str());
-
-    Firebase.setStreamCallback(stream2, streamCallback2, streamTimeoutCallback2);
-
-    /*if (!Firebase.beginStream(stream3, "/board/modes/faucet/faucetval"))
-      Serial.printf("Stream3 begin error, %s\n\n", stream3.errorReason().c_str());
-
-    Firebase.setStreamCallback(stream3, streamCallback3, streamTimeoutCallback3);*/
 }
 
+
 void loop() {     
-  /*if (Firebase.ready() && (millis() - sendDataPrevMillis > 15000 || sendDataPrevMillis == 0)) {
+  if (Firebase.ready() && (millis() - sendDataPrevMillis > 3000 || sendDataPrevMillis == 0)) {
     // Handle periodic tasks here
     sendDataPrevMillis = millis();
-    count++;
+    //count++;
     FirebaseJson json;
-    json.add("intensity", count);
-    json.add("mode", modolight);
-    Serial.printf("Set json... %s\n\n", Firebase.setJSON(fbdo, "/board/modes/light", json) ? "ok" : fbdo.errorReason().c_str());
-  }*/
+    delay(100);
+    if (modolight == 1){
+    json.add("intensity", lightlevel);
+    Serial.printf("Set json... %s\n\n", Firebase.setJSON(fbdo, "/board/modes/light/auto", json) ? "ok" : fbdo.errorReason().c_str());
+    delay(100);
+    }
+  }
 
   if (dataChangedMode){
     dataChangedMode = false;
@@ -199,7 +196,11 @@ void loop() {
             lightlevel = autoLED();
           }
           else if (modolight == 0){
+            if (dataChangedLightMode){
+              updateLED(lightintense);
+            }else{
             manualLED();
+            }
           }
       }
     } else if (modeused == 2){

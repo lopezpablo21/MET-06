@@ -16,5 +16,6 @@ extern char input;
 void setupLEDControl();
 int autoLED();
 void manualLED();
+void updateLED(int updatemode);
 
 #endif
