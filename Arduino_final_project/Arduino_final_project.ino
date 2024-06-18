@@ -10,32 +10,29 @@
 #include <addons/TokenHelper.h>
 #include <addons/RTDBHelper.h>
 
-/* 1. Define the WiFi credentials */
+//WiFi credentials 
 #define WIFI_SSID "Wifi_P"
 #define WIFI_PASSWORD "21012001"
 
-// For the following credentials, see examples/Authentications/SignInAsUser/EmailPassword/EmailPassword.ino
 
-/* 2. Define the API Key */
+//API Key
 #define API_KEY "AIzaSyCCPUmzrm1pV5gAyn4BLYPQ4oaj-mimT4c"
 
-/* 3. Define the RTDB URL */
+//URL
 #define DATABASE_URL "final-app-9d6ba-default-rtdb.europe-west1.firebasedatabase.app" //<databaseName>.firebaseio.com or <databaseName>.<region>.firebasedatabase.app
 
-/* 4. Define the user Email and password that already registered or added in your project */
+//USER AUTH
 #define USER_EMAIL "lopezgarciapablo21@gmail.com"
 #define USER_PASSWORD "123456"
 
-// Define Firebase Data objects
+//Firebase objects
 FirebaseData stream1;
-FirebaseData stream2;
-FirebaseData stream3;
 FirebaseData fbdo;
 
 FirebaseAuth auth;
 FirebaseConfig config;
 
-unsigned long sendDataPrevMillis = 0;
+unsigned long sendDataPrevMillis = 0; // Variable to set a periodic time of upload for the autoled function (to not)
 int count = 0;
 volatile bool dataChangedLight = false;
 volatile bool dataChangedMode = false;
@@ -47,9 +44,6 @@ int modefaucet = 0;
 int modeused = -1;
 int lightlevel = -1;
 int lightintense = 0;
-
-bool stream2Active = true;
-bool stream3Active = true;
 
 void streamCallback1(StreamData data) {
   Serial.printf("Stream1 path: %s\nEvent path: %s\nData type: %s\nEvent type: %s\n\n",
@@ -63,7 +57,49 @@ void streamCallback1(StreamData data) {
 
   Serial.printf("Received stream payload size: %d (Max. %d)\n\n", data.payloadLength(), data.maxPayloadLength());
   
-    if (strcmp(data.dataPath().c_str(), "/modes/light/mode") == 0) {
+  if (strcmp(data.dataPath().c_str(), "/") == 0) {
+    Serial.println("Data path matches /");
+
+    if (data.dataTypeEnum() == fb_esp_rtdb_data_type_json) {
+      FirebaseJson &json = data.jsonObject();
+      FirebaseJsonData jsonData;
+
+      // Extract mode value
+      json.get(jsonData, "/modes/light/mode");
+      if (jsonData.success) {
+        modolight = jsonData.intValue;
+        Serial.printf("mode: %d\n", modolight);
+        
+      }
+
+      // Extract modeval value
+      json.get(jsonData, "/modeval");
+      if (jsonData.success) {
+        modeused = jsonData.intValue;
+        Serial.printf("modeval: %d\n", modeused);
+        
+      }
+
+      // Extract faucetval value
+      json.get(jsonData, "/modes/faucet/faucetval");
+      if (jsonData.success) {
+        modefaucet = jsonData.intValue;
+        Serial.printf("faucetval: %d\n", modefaucet);
+        
+      }
+
+      // Extract light manual value
+      json.get(jsonData, "/modes/light/manual/value");
+      if (jsonData.success) {
+        lightintense = jsonData.intValue;
+        Serial.printf("light manual value: %d\n", lightintense);
+        
+      }
+    }
+  }
+
+
+  if (strcmp(data.dataPath().c_str(), "/modes/light/mode") == 0) {
     Serial.println("Data path matches /modes/light/mode");
     modolight = data.intData();
     dataChangedLight = true;
@@ -129,18 +165,18 @@ void setup() {
 
     Serial.printf("Firebase Client v%s\n\n", FIREBASE_CLIENT_VERSION);
 
-  /* Assign the api key (required) */
+  
     config.api_key = API_KEY;
 
-  /* Assign the user sign in credentials */
+  
     auth.user.email = USER_EMAIL;
     auth.user.password = USER_PASSWORD;
 
-  /* Assign the RTDB URL (required) */
+  
     config.database_url = DATABASE_URL;
 
-  /* Assign the callback function for the long running token generation task */
-    config.token_status_callback = tokenStatusCallback; // see addons/TokenHelper.h
+  
+    config.token_status_callback = tokenStatusCallback; 
 
     Firebase.reconnectNetwork(true);
 
@@ -148,7 +184,6 @@ void setup() {
 
     Firebase.begin(&config, &auth);
 
-    //"/board/modes/light/mode"
     if (!Firebase.beginStream(stream1, "/board"))
       Serial.printf("Stream1 begin error, %s\n\n", stream1.errorReason().c_str());
 
@@ -206,17 +241,5 @@ void loop() {
     } else if (modeused == 2){
       loopFallMode();
     }
-  }
-
-  if (!stream1.httpConnected()) {
-    // Handle stream1 disconnection
-  }
-
-  if (!stream2.httpConnected()) {
-    // Handle stream2 disconnection
-  }
-
-   if (!stream3.httpConnected()) {
-    // Handle stream2 disconnection
   }
 }

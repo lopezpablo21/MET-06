@@ -40,6 +40,7 @@ void manualLED() { // Modo manual de 4 intensidades
         int pressed = digitalRead(buttonPin);
         
         if (pressed == HIGH) {
+            Serial.println("pressed");
             setdatalight = true;
             if (mode == 4) {
                 mode = 0;

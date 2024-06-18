@@ -38,6 +38,7 @@ void loopFallMode() {
       fallDetected = true;
       json.add("falled", fallDetected);
       Serial.printf("Set json... %s\n\n", Firebase.setJSON(fbdo, "/board/modes/fall", json) ? "ok" : fbdo.errorReason().c_str());
+      delay(10000);
     }
   }
 

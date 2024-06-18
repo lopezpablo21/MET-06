@@ -8,11 +8,13 @@ int buttonPin2 = D4;
 int emergencybutton = D5; 
 int ledPin = D0;
 int previousstate = LOW; 
-//int modefaucet = 0; 
+
 int pressed = 0;
 int emergency = 0;
 int manualfaucet = 0;
 bool setdata = false;
+
+
 
 void setupFaucet() {
     servoMotor.attach(D6); // Attach the servo to the specified pin
@@ -51,8 +53,8 @@ void updateFaucet(int modefaucet) {
 
 void manualFaucet() {
     pressed = digitalRead(buttonPin2); 
-    //emergency = digitalRead(emergencybutton); 
-
+    emergency = digitalRead(emergencybutton); 
+    FirebaseJson json;
     if (emergency == HIGH) {
         manualfaucet = 0;
         json.add("faucetval", 3);
@@ -73,7 +75,7 @@ void manualFaucet() {
           setdata = false;
         }
     }
-    FirebaseJson json;
+    
     switch (manualfaucet) {
         case 0:
             servoMotor.write(0);
