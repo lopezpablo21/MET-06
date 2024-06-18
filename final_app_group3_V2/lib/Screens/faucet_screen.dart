@@ -11,16 +11,25 @@ class _FaucetScreenState extends State<FaucetScreen> {
   double _value = 0.0;
   final DatabaseReference _faucetRef = FirebaseDatabase.instance.ref('/board/modes/faucet/faucetval');
   late StreamSubscription<DatabaseEvent> _faucetSubscription;
+  bool _isEmergency = false;
+  int emergencycount = 0;
 
   @override
   void initState() {
     super.initState();
     // Listen for changes in the faucet value
     _faucetSubscription = _faucetRef.onValue.listen((DatabaseEvent event) {
-      final int newValue = event.snapshot.value as int;
-      setState(() {
-        _value = newValue.toDouble();
-      });
+      if (event.snapshot.value != null) {
+        final int newValue = event.snapshot.value as int;
+        setState(() {
+          if (newValue == 3) {
+            _isEmergency = true;
+          } else {
+            _isEmergency = false;
+            _value = newValue.toDouble();
+          }
+        });
+      }
     });
   }
 
@@ -35,7 +44,7 @@ class _FaucetScreenState extends State<FaucetScreen> {
   }
 
   void _emergencyStop() {
-    _faucetRef.set(0);
+    _faucetRef.set(3);
   }
 
   @override
@@ -52,15 +61,17 @@ class _FaucetScreenState extends State<FaucetScreen> {
             Text('Grifo Control', style: TextStyle(fontSize: 24)),
             SizedBox(height: 20),
             Slider(
-              value: _value,
+              value: _isEmergency ? 0.0 : _value,
               min: 0,
               max: 2,
               divisions: 2,
               onChanged: (value) {
-                setState(() {
-                  _value = value;
-                });
-                _updateFaucetValue(value);
+                if (!_isEmergency) {
+                  setState(() {
+                    _value = value;
+                  });
+                  _updateFaucetValue(value);
+                }
               },
             ),
             SizedBox(height: 20),
@@ -68,7 +79,7 @@ class _FaucetScreenState extends State<FaucetScreen> {
               onPressed: _emergencyStop,
               child: Text('Emergency', style: TextStyle(fontSize: 20)),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
+                backgroundColor: _isEmergency ? Colors.red : Colors.green,
                 padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),

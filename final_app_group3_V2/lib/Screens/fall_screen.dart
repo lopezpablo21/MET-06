@@ -7,7 +7,7 @@ class FallSensorScreen extends StatefulWidget {
 }
 
 class _FallSensorScreenState extends State<FallSensorScreen> {
-  final DatabaseReference _fallSensorRef = FirebaseDatabase.instance.ref('board/modes/fall');
+  final DatabaseReference _fallSensorRef = FirebaseDatabase.instance.ref('/board/modes/fall/falled');
   bool _fallDetected = false;
 
   @override

@@ -9,7 +9,8 @@ class LightScreen extends StatefulWidget {
 
 class _LightScreenState extends State<LightScreen> {
   int _lightValue = 0;
-  final DatabaseReference _lightRef = FirebaseDatabase.instance.ref('board/modes/light/auto/intensity');
+  final DatabaseReference _lightRef = FirebaseDatabase.instance.ref('/board/modes/light/auto/intensity');
+  final DatabaseReference _manualLightRef = FirebaseDatabase.instance.ref('board/modes/light/manual/value');
   late StreamSubscription<DatabaseEvent> _lightSubscription;
 
   @override
@@ -30,6 +31,24 @@ class _LightScreenState extends State<LightScreen> {
   void dispose() {
     _lightSubscription.cancel();
     super.dispose();
+  }
+
+  void _increaseLightIntensity() {
+    if (_lightValue < 3) {
+      setState(() {
+        _lightValue++;
+      });
+      _manualLightRef.set(_lightValue);
+    }
+  }
+
+  void _decreaseLightIntensity() {
+    if (_lightValue > 0) {
+      setState(() {
+        _lightValue--;
+      });
+      _manualLightRef.set(_lightValue);
+    }
   }
 
   @override
@@ -55,6 +74,35 @@ class _LightScreenState extends State<LightScreen> {
               Icon(Icons.wb_sunny, size: 100, color: Colors.yellow),
               SizedBox(height: 20),
               Text('Lux: $_lightValue', style: TextStyle(fontSize: 20)),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: _decreaseLightIntensity,
+                    child: Text('Disminuir', style: TextStyle(fontSize: 20)),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 20),
+                  ElevatedButton(
+                    onPressed: _increaseLightIntensity,
+                    child: Text('Aumentar', style: TextStyle(fontSize: 20)),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
