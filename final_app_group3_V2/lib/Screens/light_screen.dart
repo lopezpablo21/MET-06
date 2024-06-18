@@ -9,7 +9,7 @@ class LightScreen extends StatefulWidget {
 
 class _LightScreenState extends State<LightScreen> {
   int _lightValue = 0;
-  final DatabaseReference _lightRef = FirebaseDatabase.instance.ref('board/modes/light/intensity');
+  final DatabaseReference _lightRef = FirebaseDatabase.instance.ref('board/modes/light/auto/intensity');
   late StreamSubscription<DatabaseEvent> _lightSubscription;
 
   @override

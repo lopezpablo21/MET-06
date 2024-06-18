@@ -23,6 +23,10 @@ void setupFaucet() {
 
 void updateFaucet(int modefaucet) {
     manualfaucet = modefaucet;
+    if (modefaucet == 3){
+      modefaucet = 0;
+      manualfaucet = modefaucet;
+    }
     switch (modefaucet) {
         case 0:
             servoMotor.write(0);
@@ -50,7 +54,9 @@ void manualFaucet() {
     //emergency = digitalRead(emergencybutton); 
 
     if (emergency == HIGH) {
-        servoMotor.write(0);
+        manualfaucet = 0;
+        json.add("faucetval", 3);
+        Serial.printf("Set json... %s\n\n", Firebase.setJSON(fbdo, "/board/modes/faucet", json) ? "ok" : fbdo.errorReason().c_str());
         delay(50);
     } else {
         if (pressed == HIGH) { 
