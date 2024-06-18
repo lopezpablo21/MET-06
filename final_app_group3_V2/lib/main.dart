@@ -67,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home', style: TextStyle(fontSize: 24)),
+        title: Text('PrimeCare', style: TextStyle(fontSize: 24)),
         actions: [
           IconButton(
             icon: Icon(Icons.settings),
@@ -92,19 +92,19 @@ class _HomeScreenState extends State<HomeScreen> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.tap_and_play, color: _selectedIndex == 0 ? Colors.amber[800] : Colors.black),
-            label: 'Grifo',
+            label: 'Faucet',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.lightbulb_outline, color: _selectedIndex == 1 ? Colors.amber[800] : Colors.black),
-            label: 'Luz',
+            label: 'Light',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.warning, color: _selectedIndex == 2 ? Colors.amber[800] : Colors.black),
-            label: 'Sensor de Caída',
+            label: 'Fall',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.medication, color: _selectedIndex == 3 ? Colors.amber[800] : Colors.black),
-            label: 'Medicinas',
+            label: 'Medicines',
           ),
         ],
         currentIndex: _selectedIndex,

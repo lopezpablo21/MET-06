@@ -12,7 +12,6 @@ class _FaucetScreenState extends State<FaucetScreen> {
   final DatabaseReference _faucetRef = FirebaseDatabase.instance.ref('/board/modes/faucet/faucetval');
   late StreamSubscription<DatabaseEvent> _faucetSubscription;
   bool _isEmergency = false;
-  int emergencycount = 0;
 
   @override
   void initState() {
@@ -43,22 +42,26 @@ class _FaucetScreenState extends State<FaucetScreen> {
     _faucetRef.set(value.toInt());
   }
 
-  void _emergencyStop() {
-    _faucetRef.set(3);
+  void _toggleEmergency() {
+    if (_isEmergency) {
+      _faucetRef.set(0);  // Salir de la emergencia
+    } else {
+      _faucetRef.set(3);  // Entrar en la emergencia
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Grifo Control', style: TextStyle(fontSize: 24)),
+        title: Text('Faucet Control', style: TextStyle(fontSize: 24)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Grifo Control', style: TextStyle(fontSize: 24)),
+            Text('Regulate Opening', style: TextStyle(fontSize: 24)),
             SizedBox(height: 20),
             Slider(
               value: _isEmergency ? 0.0 : _value,
@@ -76,7 +79,7 @@ class _FaucetScreenState extends State<FaucetScreen> {
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: _emergencyStop,
+              onPressed: _toggleEmergency,
               child: Text('Emergency', style: TextStyle(fontSize: 20)),
               style: ElevatedButton.styleFrom(
                 backgroundColor: _isEmergency ? Colors.red : Colors.green,
