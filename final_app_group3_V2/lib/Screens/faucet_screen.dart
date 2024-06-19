@@ -54,43 +54,61 @@ class _FaucetScreenState extends State<FaucetScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Faucet Control', style: TextStyle(fontSize: 24)),
+        title: Text('Faucet Control', style: TextStyle(fontSize: 24, color: Colors.white)), // Ajustar color del texto del título
+        backgroundColor: Colors.purple[400], // Ajustar color del fondo del AppBar
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Regulate Opening', style: TextStyle(fontSize: 24)),
-            SizedBox(height: 20),
-            Slider(
-              value: _isEmergency ? 0.0 : _value,
-              min: 0,
-              max: 2,
-              divisions: 2,
-              onChanged: (value) {
-                if (!_isEmergency) {
-                  setState(() {
-                    _value = value;
-                  });
-                  _updateFaucetValue(value);
-                }
-              },
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _toggleEmergency,
-              child: Text('Emergency', style: TextStyle(fontSize: 20)),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: _isEmergency ? Colors.red : Colors.green,
-                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
+      body: Stack(
+        children: [
+          // Fondo difuminado lila
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color.fromRGBO(204, 159, 255, 1), // Lila más fuerte
+                  Colors.white, // Color blanco para mezclar
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Regulate Opening', style: TextStyle(fontSize: 24)),
+                SizedBox(height: 20),
+                Slider(
+                  value: _isEmergency ? 0.0 : _value,
+                  min: 0,
+                  max: 2,
+                  divisions: 2,
+                  onChanged: (value) {
+                    if (!_isEmergency) {
+                      setState(() {
+                        _value = value;
+                      });
+                      _updateFaucetValue(value);
+                    }
+                  },
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: _toggleEmergency,
+                  child: Text('Emergency', style: TextStyle(fontSize: 20)),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: _isEmergency ? Colors.red : Colors.green,
+                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

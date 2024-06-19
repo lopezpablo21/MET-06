@@ -56,47 +56,65 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login', style: TextStyle(fontSize: 24)),
+        title: Text('Login', style: TextStyle(fontSize: 24, color: Colors.white)), // Ajustar color del texto
+        backgroundColor: Colors.purple[400], // Ajustar color de fondo del appbar
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              controller: _emailController,
-              decoration: InputDecoration(labelText: 'Email', labelStyle: TextStyle(fontSize: 20)),
-            ),
-            SizedBox(height: 20),
-            TextField(
-              controller: _passwordController,
-              decoration: InputDecoration(labelText: 'Password', labelStyle: TextStyle(fontSize: 20)),
-              obscureText: true,
-            ),
-            SizedBox(height: 40),
-            ElevatedButton(
-              onPressed: () => _login(context),
-              child: Text('Login', style: TextStyle(fontSize: 20)),
-              style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
+      body: Stack(
+        children: [
+          // Fondo difuminado lila
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color.fromRGBO(204, 159, 255, 1), // Lila más fuerte
+                  Colors.white, // Color blanco para mezclar
+                ],
               ),
             ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => _register(context),
-              child: Text('Register', style: TextStyle(fontSize: 20)),
-              style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextField(
+                  controller: _emailController,
+                  decoration: InputDecoration(labelText: 'Email', labelStyle: TextStyle(fontSize: 20)),
                 ),
-              ),
+                SizedBox(height: 20),
+                TextField(
+                  controller: _passwordController,
+                  decoration: InputDecoration(labelText: 'Password', labelStyle: TextStyle(fontSize: 20)),
+                  obscureText: true,
+                ),
+                SizedBox(height: 40),
+                ElevatedButton(
+                  onPressed: () => _login(context),
+                  child: Text('Login', style: TextStyle(fontSize: 20)),
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () => _register(context),
+                  child: Text('Register', style: TextStyle(fontSize: 20)),
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

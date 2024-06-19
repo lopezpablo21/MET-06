@@ -9,16 +9,10 @@ class LightScreen extends StatefulWidget {
 
 class _LightScreenState extends State<LightScreen> {
   int _lightValue = 0;
-  bool _changeMode = false;
   int valuetosend = 0;
-  double _value2 = 0;
-  double _value1 = 0;
-  final DatabaseReference _lightRef = FirebaseDatabase.instance.ref(
-      '/board/modes/light/auto/intensity');
-  final DatabaseReference _manualLightRef = FirebaseDatabase.instance.ref(
-      'board/modes/light/manual/value');
-  final DatabaseReference _modeRef = FirebaseDatabase.instance.ref(
-      'board/modes/light/mode');
+  final DatabaseReference _lightRef = FirebaseDatabase.instance.ref('/board/modes/light/auto/intensity');
+  final DatabaseReference _manualLightRef = FirebaseDatabase.instance.ref('board/modes/light/manual/value');
+  final DatabaseReference _modeRef = FirebaseDatabase.instance.ref('board/modes/light/mode');
   late StreamSubscription<DatabaseEvent> _lightSubscription;
   late StreamSubscription<DatabaseEvent> _manualSubscription;
 
@@ -101,43 +95,61 @@ class _LightScreenState extends State<LightScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Light Control', style: TextStyle(fontSize: 24)),
+        title: Text('Light Control', style: TextStyle(fontSize: 20, color: Colors.white)), // Ajustar color del texto
+        backgroundColor: Colors.purple[400], // Ajustar color de fondo del appbar
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('Light Level', style: TextStyle(fontSize: 24)),
-              SizedBox(height: 20),
-              Icon(Icons.wb_sunny, size: 100, color: Colors.yellow),
-              SizedBox(height: 20),
-              Text('$_lightValue %', style: TextStyle(fontSize: 20)),
-              SizedBox(height: 20),
-              Slider(
-                value: _lightValue.toDouble(),
-                min: 0,
-                max: 100,
-                label: _lightValue.toString(),
-                onChanged: (value) {
-                  _updateLightIntensity(value);
-                },
+      body: Stack(
+        children: [
+          // Fondo difuminado lila
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color.fromRGBO(204, 159, 255, 1), // Lila más fuerte
+                  Colors.white, // Color blanco para mezclar
+                ],
               ),
-              ElevatedButton(
-                onPressed: _togglemode,
-                child: Text(_mode == 1 ? 'Auto' : 'Manual', style: TextStyle(fontSize: 20)),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: _mode == 1 ? Colors.green : Colors.red,
-                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Light Level', style: TextStyle(fontSize: 24)),
+                  SizedBox(height: 20),
+                  Icon(Icons.wb_sunny, size: 100, color: Colors.yellow),
+                  SizedBox(height: 20),
+                  Text('$_lightValue %', style: TextStyle(fontSize: 20)),
+                  SizedBox(height: 20),
+                  Slider(
+                    value: _lightValue.toDouble(),
+                    min: 0,
+                    max: 100,
+                    label: _lightValue.toString(),
+                    onChanged: (value) {
+                      _updateLightIntensity(value);
+                    },
+                  ),
+                  ElevatedButton(
+                    onPressed: _togglemode,
+                    child: Text(_mode == 1 ? 'Auto' : 'Manual', style: TextStyle(fontSize: 20)),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: _mode == 1 ? Colors.green : Colors.red,
+                      padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
