@@ -19,7 +19,7 @@ class _LightScreenState extends State<LightScreen> {
   @override
   void initState() {
     super.initState();
-    // Listen for changes in the light intensity value
+
     _lightSubscription = _lightRef.onValue.listen((DatabaseEvent event) {
       if (event.snapshot.value != null) {
         final int newValue = event.snapshot.value as int;
@@ -95,20 +95,19 @@ class _LightScreenState extends State<LightScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Light Control', style: TextStyle(fontSize: 24, color: Colors.white)), // Ajustar color del texto
-        backgroundColor: Colors.purple[400], // Ajustar color de fondo del appbar
+        title: Text('Light Control', style: TextStyle(fontSize: 24, color: Colors.white)),
+        backgroundColor: Colors.purple[400],
       ),
       body: Stack(
         children: [
-          // Fondo difuminado lila
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Color.fromRGBO(204, 159, 255, 1), // Lila más fuerte
-                  Colors.white, // Color blanco para mezclar
+                  Color.fromRGBO(204, 159, 255, 1),
+                  Colors.white,
                 ],
               ),
             ),

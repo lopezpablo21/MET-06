@@ -21,20 +21,20 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings', style: TextStyle(fontSize: 24, color: Colors.white)), // Ajustar color del texto del título
-        backgroundColor: Colors.purple[400], // Ajustar color del fondo del AppBar
+        title: Text('Settings', style: TextStyle(fontSize: 24, color: Colors.white)),
+        backgroundColor: Colors.purple[400],
       ),
       body: Stack(
         children: [
-          // Fondo difuminado lila
+
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Color.fromRGBO(204, 159, 255, 1), // Lila más fuerte
-                  Colors.white, // Color blanco para mezclar
+                  Color.fromRGBO(204, 159, 255, 1),
+                  Colors.white,
                 ],
               ),
             ),

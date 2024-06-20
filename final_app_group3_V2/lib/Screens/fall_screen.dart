@@ -31,15 +31,15 @@ class _FallSensorScreenState extends State<FallSensorScreen> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          // Fondo difuminado lila
+
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Color.fromRGBO(204, 159, 255, 1), // Lila más fuerte
-                  Colors.white, // Color blanco para mezclar
+                  Color.fromRGBO(204, 159, 255, 1),
+                  Colors.white,
                 ],
               ),
             ),

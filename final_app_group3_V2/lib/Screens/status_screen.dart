@@ -11,12 +11,12 @@ class _StatusScreenState extends State<StatusScreen> {
   final DatabaseReference _faucetRef = FirebaseDatabase.instance.ref('/board/modes/faucet/faucetval');
   final DatabaseReference _lightRef = FirebaseDatabase.instance.ref('/board/modes/light/auto/intensity');
   final DatabaseReference _fallRef = FirebaseDatabase.instance.ref('/board/modes/fall/falled');
-  // Añade las referencias necesarias para "medicines" si aplica
+
 
   late StreamSubscription<DatabaseEvent> _faucetSubscription;
   late StreamSubscription<DatabaseEvent> _lightSubscription;
   late StreamSubscription<DatabaseEvent> _fallSubscription;
-  // Añade las suscripciones necesarias para "medicines" si aplica
+
 
   String _faucetState = 'Loading...';
   String _lightState = 'Loading...';
@@ -66,7 +66,7 @@ class _StatusScreenState extends State<StatusScreen> {
       }
     });
 
-    // Añade la lógica de suscripción para "medicines" si aplica
+
   }
 
   @override
@@ -74,7 +74,7 @@ class _StatusScreenState extends State<StatusScreen> {
     _faucetSubscription.cancel();
     _lightSubscription.cancel();
     _fallSubscription.cancel();
-    // Añade la cancelación de las suscripciones necesarias para "medicines" si aplica
+
     super.dispose();
   }
 
