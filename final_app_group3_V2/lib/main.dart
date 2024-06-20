@@ -67,11 +67,26 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('PrimeCare', style: TextStyle(fontSize: 24, color: Colors.white)),
+        title: Center(
+          child: Text(
+            'PrimeCare',
+            style: TextStyle(
+              fontSize: 25, // Tamaño de fuente un punto más grande
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+        ),
         backgroundColor: Colors.purple[400],
+        leading: IconButton(
+          icon: Icon(Icons.home, color: Colors.white),
+          onPressed: () {
+            // Acción a realizar cuando se presiona el icono de casa
+          },
+        ),
         actions: [
           IconButton(
-            icon: Icon(Icons.settings),
+            icon: Icon(Icons.settings, color: Colors.white),
             onPressed: () {
               Navigator.push(
                 context,
@@ -117,3 +132,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
