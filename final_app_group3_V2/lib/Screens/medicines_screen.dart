@@ -5,7 +5,7 @@ class MedicinesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Medicines Screen', style: TextStyle(fontSize: 24, color: Colors.white)),
+        title: Text('Medicines', style: TextStyle(fontSize: 24, color: Colors.white)),
         backgroundColor: Colors.purple[400],
       ),
       body: Stack(

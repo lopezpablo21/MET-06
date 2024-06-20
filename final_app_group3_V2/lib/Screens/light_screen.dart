@@ -95,7 +95,7 @@ class _LightScreenState extends State<LightScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Light Control', style: TextStyle(fontSize: 20, color: Colors.white)), // Ajustar color del texto
+        title: Text('Light Control', style: TextStyle(fontSize: 24, color: Colors.white)), // Ajustar color del texto
         backgroundColor: Colors.purple[400], // Ajustar color de fondo del appbar
       ),
       body: Stack(
