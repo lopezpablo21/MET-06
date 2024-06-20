@@ -44,18 +44,24 @@ class SettingsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Username: $username', style: TextStyle(fontSize: 20)),
+                Text('Username:', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                SizedBox(height: 5),
+                Text(username, style: TextStyle(fontSize: 20)),
                 SizedBox(height: 20),
-                Text('Password: $password', style: TextStyle(fontSize: 20)),
-                SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () => _signOut(context),
-                  child: Text('Sign Out', style: TextStyle(fontSize: 20)),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red,
-                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                Text('Password:', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                SizedBox(height: 5),
+                Text(password, style: TextStyle(fontSize: 20)),
+                SizedBox(height: 40),
+                Center(
+                  child: ElevatedButton(
+                    onPressed: () => _signOut(context),
+                    child: Text('Sign Out', style: TextStyle(fontSize: 20)),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
                   ),
                 ),
@@ -67,3 +73,4 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 }
+

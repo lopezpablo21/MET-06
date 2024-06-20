@@ -44,7 +44,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
-  Widget _currentScreen = FaucetScreen();
+  Widget _currentScreen = StatusScreen();
   String _currentTitle = 'PrimeCare';
   bool _isSpecialScreen = false;
   final DatabaseReference _modeValRef = FirebaseDatabase.instance.ref('board/modeval');
@@ -142,6 +142,10 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+
+
+
 
 
 
